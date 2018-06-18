@@ -69,15 +69,15 @@ namespace UserPresence
                 await db.SaveChangesAsync();
             }
         }
-
-        public override async Task OnDisconnected()
-        {
+		public override async Task OnDisconnected(bool stopCalled)
+		{
             using (var db = new UserContext())
             {
                 var connection = await db.Connections.FindAsync(Context.ConnectionId);
                 db.Connections.Remove(connection);
                 await db.SaveChangesAsync();
             }
+			await base.OnDisconnected(stopCalled);
         }
     }
 }

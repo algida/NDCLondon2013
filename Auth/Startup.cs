@@ -30,7 +30,7 @@ namespace WebApplication22
                         identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
                     }
 
-                    context.Authentication.SignIn(identity);
+                    await Task.Run(() =>context.Authentication.SignIn(identity));
                 });
             });
 
